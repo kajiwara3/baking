@@ -2,7 +2,9 @@
 class SalesController extends AppController {
 
   var $name = 'Sales';
-
+  // $this->Session->write('name', 'value');
+  // $this->Session->read('name');
+  // $this->Session->delete('nme');
   function index() {
     $this->Sale->recursive = 0;
     $this->set('sales', $this->paginate());
