@@ -1,7 +1,10 @@
 <?php
 class SalesController extends AppController {
-    var $name = 'Sales';
 
+    var $name = 'Sales';
+    // $this->Session->write('name', 'value');
+    // $this->Session->read('name');
+    // $this->Session->delete('nme');
     function index() {
         $this->Sale->recursive = 0;
         $this->set('sales', $this->paginate());
@@ -17,20 +20,6 @@ class SalesController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
-            // バリデーションを行ない、
-            // add_confirmにリダイレクト
-        }
-        $catalogs = $this->Sale->Catalog->find('list');
-        $customers = $this->Sale->Customer->find('list');
-        $this->set(compact('catalogs', 'customers'));
-    }
-
-    function add_confirm() {
-        // セッションに入力された値がある場合、確認画面を表示
-        // 登録ボタンを押すと、値を保存してindexにリダイレクト
-        // 戻るボタン対応も行う
-/*
-        if (!empty($this->data)) {
             $this->Sale->create();
             if ($this->Sale->save($this->data)) {
                 $this->Session->setFlash(__('The sale has been saved', true));
@@ -39,7 +28,9 @@ class SalesController extends AppController {
                 $this->Session->setFlash(__('The sale could not be saved. Please, try again.', true));
             }
         }
-*/
+        $catalogs = $this->Sale->Catalog->find('list');
+        $customers = $this->Sale->Customer->find('list');
+        $this->set(compact('catalogs', 'customers'));
     }
 
     function edit($id = null) {
