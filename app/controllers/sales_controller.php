@@ -13,7 +13,6 @@ class SalesController extends AppController {
     // $this->Session->delete('nme');
     function index() {
         // セッションに値がある場合、追加編集から戻ったと判別
-
         $this->Sale->recursive = 0;
         $this->set('sales', $this->paginate());
     }
