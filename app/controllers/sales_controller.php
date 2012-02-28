@@ -61,8 +61,11 @@ class SalesController extends AppController {
      * @return null
      */
     function add_commit() {
-        // confirmから来た値であれば、saveしてindexへリダイレクト。
         // セッションに保持した値はクリアする。
+        $this->Session->delete('Sales.form');
+        // confirmから来た値であれば、saveしてindexへリダイレクト。
+        $this->Session->setFlash('登録しました。');
+        $this->redirect(array('action' => 'index'));
         // 問題ありの場合はエラー画面へ。
     }
 
