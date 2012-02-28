@@ -1,4 +1,10 @@
 <?php
+/**
+ *
+ * Enter description here ...
+ * @author Akatsuka
+ *
+ */
 class SalesController extends AppController {
 
     var $name = 'Sales';
@@ -6,6 +12,8 @@ class SalesController extends AppController {
     // $this->Session->read('name');
     // $this->Session->delete('nme');
     function index() {
+        // セッションに値がある場合、追加編集から戻ったと判別
+
         $this->Sale->recursive = 0;
         $this->set('sales', $this->paginate());
     }
@@ -20,6 +28,8 @@ class SalesController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
+            $this->Session->write('Sales.form', $this->data);
+/*
             $this->Sale->create();
             if ($this->Sale->save($this->data)) {
                 $this->Session->setFlash(__('The sale has been saved', true));
@@ -27,10 +37,33 @@ class SalesController extends AppController {
             } else {
                 $this->Session->setFlash(__('The sale could not be saved. Please, try again.', true));
             }
+*/
+            $this->redirect(array('action' => 'add_confirm'));
         }
+
         $catalogs = $this->Sale->Catalog->find('list');
         $customers = $this->Sale->Customer->find('list');
         $this->set(compact('catalogs', 'customers'));
+    }
+
+    /**
+     * 追加確認アクション。
+     *
+     * @return null
+     */
+    function add_confirm() {
+        $this->set('sales', $this->Session->read('Sales.form'));
+    }
+
+    /**
+     * 追加完了アクション。
+     *
+     * @return null
+     */
+    function add_commit() {
+        // confirmから来た値であれば、saveしてindexへリダイレクト。
+        // セッションに保持した値はクリアする。
+        // 問題ありの場合はエラー画面へ。
     }
 
     function edit($id = null) {
