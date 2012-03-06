@@ -204,8 +204,8 @@ class AclBase extends Object {
 }
 
 /**
- * DbAcl implements an ACL control system in the database.  ARO's and ACO's are 
- * structured into trees and a linking table is used to define permissions.  You 
+ * DbAcl implements an ACL control system in the database.  ARO's and ACO's are
+ * structured into trees and a linking table is used to define permissions.  You
  * can install the schema for DbAcl with the Schema Shell.
  *
  * `$aco` and `$aro` parameters can be slash delimited paths to tree nodes.
@@ -268,7 +268,6 @@ class DbAcl extends AclBase {
 		$permKeys = $this->_getAcoKeys($this->Aro->Permission->schema());
 		$aroPath = $this->Aro->node($aro);
 		$acoPath = $this->Aco->node($aco);
-
 		if (empty($aroPath) || empty($acoPath)) {
 			trigger_error(__("DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:\nAro: ", true) . print_r($aro, true) . "\nAco: " . print_r($aco, true), E_USER_WARNING);
 			return false;
@@ -281,7 +280,6 @@ class DbAcl extends AclBase {
 
 		$aroNode = $aroPath[0];
 		$acoNode = $acoPath[0];
-
 		if ($action != '*' && !in_array('_' . $action, $permKeys)) {
 			trigger_error(sprintf(__("ACO permissions key %s does not exist in DbAcl::check()", true), $action), E_USER_NOTICE);
 			return false;
@@ -496,7 +494,7 @@ class DbAcl extends AclBase {
 }
 
 /**
- * IniAcl implements an access control system using an INI file.  An example 
+ * IniAcl implements an access control system using an INI file.  An example
  * of the ini file used can be found in /config/acl.ini.php.
  *
  * @package       cake
@@ -520,8 +518,8 @@ class IniAcl extends AclBase {
 	}
 
 /**
- * Main ACL check function. Checks to see if the ARO (access request object) has access to the 
- * ACO (access control object).Looks at the acl.ini.php file for permissions 
+ * Main ACL check function. Checks to see if the ARO (access request object) has access to the
+ * ACO (access control object).Looks at the acl.ini.php file for permissions
  * (see instructions in /config/acl.ini.php).
  *
  * @param string $aro ARO

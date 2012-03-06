@@ -8,6 +8,8 @@
 class SalesController extends AppController {
 
     var $name = 'Sales';
+    var $components = array("Auth", "Acl");
+
     // $this->Session->write('name', 'value');
     // $this->Session->read('name');
     // $this->Session->delete('nme');
