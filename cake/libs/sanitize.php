@@ -269,6 +269,8 @@ class Sanitize {
 			if ($options['backslash']) {
 				$data = preg_replace("/\\\(?!&amp;#|\?#)/", "\\", $data);
 			}
+
+			$data = Sanitize::stripScripts($data);
 			return $data;
 		}
 	}
