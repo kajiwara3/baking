@@ -33,4 +33,20 @@
  * @link http://book.cakephp.org/view/957/The-App-Controller
  */
 class AppController extends Controller {
+
+    /**
+    * フォームデータに含まれるスクリプトタグと、タグで囲われた文字列を削除します。
+     * 「stripAll」は、「stripWhitespace(), stripImages(),stripScripts()」 を同時に実行します。
+    *
+    * @return array $this->data サニタイズされたフォームデータ
+    */
+    function sanitize_array_data($data_list) {
+        App::import('Sanitize');
+        if (is_array($data_list)) {
+            foreach ($data_list as $key => $val) {
+            $data_list[$key] = Sanitize::stripAll($val);
+            }
+        }
+        return $data_list;
+    }
 }
